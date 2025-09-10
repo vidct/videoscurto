@@ -35,10 +35,13 @@
     }
 
     video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      width: 90vw;
+      height: 80vh;
+      object-fit: contain;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
       cursor: pointer;
+      background: #000;
     }
 
     .info {
@@ -87,6 +90,13 @@
 
     .liked {
       color: pink;
+    }
+
+    @media (max-width: 768px) {
+      video {
+        width: 95vw;
+        height: 70vh;
+      }
     }
   </style>
 </head>
@@ -140,7 +150,7 @@
 
     const container = document.getElementById('videoFeed');
 
-    videos.forEach((vid, index) => {
+    videos.forEach((vid) => {
       const div = document.createElement('div');
       div.className = 'video-container';
 
@@ -169,11 +179,7 @@
     // Pausar/despausar ao tocar no vídeo
     document.addEventListener("click", function (e) {
       if (e.target.tagName === "VIDEO") {
-        if (e.target.paused) {
-          e.target.play();
-        } else {
-          e.target.pause();
-        }
+        e.target.paused ? e.target.play() : e.target.pause();
       }
     });
 
@@ -190,7 +196,7 @@
       button.textContent = liked ? "💕" : "👍";
     }
 
-    // Compartilhar
+    // Compartilhar (copiar link)
     function copyLink(src) {
       navigator.clipboard.writeText(src)
         .then(() => alert("📎 Link copiado!"))
