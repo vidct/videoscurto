@@ -135,7 +135,7 @@
     <!-- Explorar (outros vídeos fixos) -->
     <div class="explore" id="exploreSection">
       <video src="envato_video_gen_Sep_04_2025_20_47_32.mp4" controls></video>
-      <video src="videos/video3.mp4" controls></video>
+      <video src="envato_video_gen_Sep_04_2025_21_11_03.mp4" controls></video>
       <video src="videos/video4.mp4" controls></video>
       <video src="videos/video1.mp4" controls></video>
     </div>
