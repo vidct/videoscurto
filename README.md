@@ -135,7 +135,7 @@
     <!-- Explorar (outros vídeos fixos) -->
     <div class="explore" id="exploreSection">
       <video src="videoapanhando.mp4" controls></video>
-      <video src="videoapanhando.mp4" controls></video>
+      <video src="newsonibus.mp4" controls></video>
       <video src="videos/video4.mp4" controls></video>
       <video src="videos/video1.mp4" controls></video>
     </div>
@@ -145,6 +145,7 @@
     const allVideos = [
       "video12.mp4",
       "video1.mp4",
+      "video7.mp4",
       "video5.mp4",
       "video6.mp4",
       "video2.mp4",
