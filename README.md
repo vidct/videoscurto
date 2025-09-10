@@ -95,7 +95,7 @@
       username: "VIDCT",
       verified: true,
       showUser: true,
-      videoHTML: `<video src="videovazado1" muted loop playsinline></video>`
+      videoHTML: `<video src="video12.mp4" muted loop playsinline></video>`
     };
 
     // Outros vídeos
