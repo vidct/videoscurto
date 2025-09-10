@@ -61,7 +61,7 @@
 
 <div class="container" id="container">
   <div class="video-wrapper">
-    <video src="https://v19-webapp-prime.tiktok.com/video/tos/useast2a/tos-useast2a-ve-0068-euttp/oEEF7ktGtABJQAzoE353XVEQwfRlftzC7PhIDJ/?a=1988&bti=ODszNWYuMDE6&ch=0&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C&cv=1&br=598&bt=299&cs=2&ds=3&ft=4fUEKMXh8Zmo0BlxyI4jV4IgDpWrKsd.&mime_type=video_mp4&qs=14&rc=ZjtmPGU2OzpmZWloOTdnZkBpajc2ajg6Zm54bDMzZjczM0A2L2NfMTZeNTQxXmI1NF4yYSMxajNecjRfa29gLS1kMWNzcw%3D%3D&btag=e00090000&expire=1757682141&l=20250910210108847663433A172407AAE8&ply_type=2&policy=2&signature=1f7693ced56a52e4c176a88913291817&tk=tt_chain_token" playsinline muted loop></video>
+    <video src="video12.mp4 playsinline muted loop></video>
   </div>
   <div class="video-wrapper">
     <video src="video2.mp4" playsinline muted loop></video>
