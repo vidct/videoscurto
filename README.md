@@ -2,207 +2,193 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Feed TikTok Custom</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Feed estilo TikTok</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      background: #000;
-      color: white;
-      font-family: sans-serif;
+    html, body {
+      margin: 0; padding: 0;
+      height: 100%;
       overflow: hidden;
+      background: black;
+      font-family: Arial, sans-serif;
+      color: white;
     }
-
     .container {
-      scroll-snap-type: y mandatory;
+      height: 100vh;
       overflow-y: scroll;
-      height: 100vh;
+      scroll-snap-type: y mandatory;
     }
-
-    .video-container {
+    .video-wrapper {
       position: relative;
-      width: 100vw;
       height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 100vw;
       scroll-snap-align: start;
-    }
-
-    video {
-      width: 90vw;
-      height: 80vh;
-      object-fit: contain;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-      cursor: pointer;
-      background: #000;
-    }
-
-    .info {
-      position: absolute;
-      bottom: 80px;
-      left: 20px;
-      z-index: 2;
-    }
-
-    .username {
-      font-weight: bold;
       display: flex;
+      justify-content: center;
       align-items: center;
-      gap: 5px;
+      background: black;
     }
-
-    .username img {
-      width: 16px;
-      height: 16px;
+    video {
+      height: 100vh;
+      width: 100vw;
+      object-fit: cover;
     }
-
-    .title, .audio {
-      margin-top: 5px;
-      font-size: 16px;
-      opacity: 0.9;
-    }
-
-    .controls {
-      position: absolute;
-      right: 20px;
+    .buttons {
+      position: fixed;
       top: 50%;
+      right: 15px;
       transform: translateY(-50%);
       display: flex;
       flex-direction: column;
-      gap: 20px;
-      z-index: 2;
+      gap: 25px;
+      z-index: 10;
     }
-
-    .controls button {
-      font-size: 22px;
-      background: none;
+    .buttons button {
+      background: rgba(0,0,0,0.5);
       border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 26px;
       color: white;
       cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background 0.3s;
     }
-
-    .liked {
-      color: pink;
+    .buttons button:hover {
+      background: rgba(255,255,255,0.2);
     }
-
-    @media (max-width: 768px) {
-      video {
-        width: 95vw;
-        height: 70vh;
-      }
+    .like-btn.liked {
+      color: #ff2d55;
+    }
+    /* Botão "Próximo" fixo no canto inferior direito */
+    .next-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 20px;
+      background: rgba(0,0,0,0.5);
+      border: none;
+      border-radius: 30px;
+      padding: 10px 20px;
+      font-size: 18px;
+      cursor: pointer;
+      color: white;
+      z-index: 10;
+      user-select: none;
+      transition: background 0.3s;
+    }
+    .next-btn:hover {
+      background: rgba(255,255,255,0.2);
     }
   </style>
 </head>
 <body>
 
-  <div class="container" id="videoFeed">
-    <!-- Vídeos serão inseridos via JavaScript -->
+  <div class="container" id="container">
+    <div class="video-wrapper">
+      <video src="video12.mp4" playsinline></video>
+    </div>
+    <div class="video-wrapper">
+      <video src="video2.mp4" playsinline></video>
+    </div>
+    <div class="video-wrapper">
+      <video src="video3.mp4" playsinline></video>
+    </div>
+    <div class="video-wrapper">
+      <video src="video4.mp4" playsinline></video>
+    </div>
+    <div class="video-wrapper">
+      <video src="video5.mp4" playsinline></video>
+    </div>
   </div>
 
-  <script>
-    const showShare = true; // Defina como false para ocultar botão de compartilhar
-    const verifiedIcon = "https://cdn-icons-png.flaticon.com/512/12902/12902069.png";
+  <div class="buttons">
+    <button id="likeBtn" class="like-btn" title="Curtir">👍</button>
+    <button id="shareBtn" title="Compartilhar">📤</button>
+  </div>
 
-    const videos = [
-      {
-        src: "video12.mp4",
-        username: "usuario1",
-        verified: true,
-        title: "Primeiro vídeo!",
-        audio: "🎵 Música top"
-      },
-      {
-        src: "meuvideo2.mp4",
-        username: "usuario2",
-        verified: false,
-        title: "Segundo vídeo",
-        audio: "🎧 Áudio original"
-      },
-      {
-        src: "meuvideo3.mp4",
-        username: "usuario3",
-        verified: true,
-        title: "Terceiro vídeo",
-        audio: "🔥 Beat legal"
-      },
-      {
-        src: "meuvideo4.mp4",
-        username: "usuario4",
-        verified: false,
-        title: "Quarto vídeo",
-        audio: "🎶 Remix famoso"
-      },
-      {
-        src: "meuvideo5.mp4",
-        username: "usuario5",
-        verified: true,
-        title: "Quinto vídeo",
-        audio: "📻 Som ambiente"
-      }
-    ];
+  <button class="next-btn" id="nextBtn">Próximo ▶️</button>
 
-    const container = document.getElementById('videoFeed');
+<script>
+  const container = document.getElementById('container');
+  const videos = Array.from(container.querySelectorAll('video'));
+  const likeBtn = document.getElementById('likeBtn');
+  const shareBtn = document.getElementById('shareBtn');
+  const nextBtn = document.getElementById('nextBtn');
 
-    videos.forEach((vid) => {
-      const div = document.createElement('div');
-      div.className = 'video-container';
+  let currentIndex = 0;
+  let likedVideos = new Set();
 
-      div.innerHTML = `
-        <video src="${vid.src}" autoplay muted loop playsinline></video>
-
-        <div class="info">
-          <div class="username">
-            @${vid.username}
-            ${vid.verified ? `<img src="${verifiedIcon}" alt="Verificado">` : ''}
-          </div>
-          <div class="title">${vid.title}</div>
-          <div class="audio">${vid.audio}</div>
-        </div>
-
-        <div class="controls">
-          <button onclick="toggleLike(this)">👍</button>
-          ${showShare ? `<button onclick="copyLink('${vid.src}')">📤</button>` : ''}
-          <button onclick="toggleMute(this)">🔇</button>
-        </div>
-      `;
-
-      container.appendChild(div);
-    });
-
-    // Pausar/despausar ao tocar no vídeo
-    document.addEventListener("click", function (e) {
-      if (e.target.tagName === "VIDEO") {
-        e.target.paused ? e.target.play() : e.target.pause();
+  function playVideoAt(index) {
+    videos.forEach((vid, i) => {
+      if(i === index){
+        vid.currentTime = 0;
+        vid.play();
+      } else {
+        vid.pause();
       }
     });
+    currentIndex = index;
+    updateLikeButton();
+  }
 
-    // Mute/Desmute
-    function toggleMute(button) {
-      const video = button.closest('.video-container').querySelector('video');
-      video.muted = !video.muted;
-      button.textContent = video.muted ? '🔇' : '🔊';
+  function updateLikeButton() {
+    if (likedVideos.has(currentIndex)) {
+      likeBtn.textContent = "💕";
+      likeBtn.classList.add('liked');
+    } else {
+      likeBtn.textContent = "👍";
+      likeBtn.classList.remove('liked');
     }
+  }
 
-    // Curtir/descurtir
-    function toggleLike(button) {
-      const liked = button.classList.toggle("liked");
-      button.textContent = liked ? "💕" : "👍";
+  // Inicializa o primeiro vídeo
+  playVideoAt(0);
+
+  // Controla o scroll para pausar/play vídeo correto
+  container.addEventListener('scroll', () => {
+    const scrollPos = container.scrollTop;
+    const vh = window.innerHeight;
+    const newIndex = Math.round(scrollPos / vh);
+    if(newIndex !== currentIndex && newIndex >= 0 && newIndex < videos.length) {
+      playVideoAt(newIndex);
     }
+  });
 
-    // Compartilhar (copiar link)
-    function copyLink(src) {
-      navigator.clipboard.writeText(src)
-        .then(() => alert("📎 Link copiado!"))
-        .catch(() => alert("❌ Erro ao copiar link."));
+  // Botão curtir
+  likeBtn.addEventListener('click', () => {
+    if (likedVideos.has(currentIndex)) {
+      likedVideos.delete(currentIndex);
+    } else {
+      likedVideos.add(currentIndex);
     }
-  </script>
+    updateLikeButton();
+  });
 
+  // Botão compartilhar (copiar link do vídeo)
+  shareBtn.addEventListener('click', () => {
+    const currentVideo = videos[currentIndex];
+    const src = currentVideo.currentSrc || currentVideo.src;
+    navigator.clipboard.writeText(src).then(() => {
+      alert("Link copiado para a área de transferência!");
+    }).catch(() => {
+      alert("Falha ao copiar link.");
+    });
+  });
+
+  // Botão próximo
+  nextBtn.addEventListener('click', () => {
+    let nextIndex = currentIndex + 1;
+    if(nextIndex >= videos.length) nextIndex = 0;
+    container.scrollTo({
+      top: nextIndex * window.innerHeight,
+      behavior: 'smooth'
+    });
+    playVideoAt(nextIndex);
+  });
+
+</script>
 </body>
 </html>
