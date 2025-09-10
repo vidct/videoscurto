@@ -134,8 +134,8 @@
 
     <!-- Explorar (outros vídeos fixos) -->
     <div class="explore" id="exploreSection">
-      <video src="vazado.mp4" controls></video>
-      <video src="vvaazzaaddoo.mp4" controls></video>
+      <video src="videoapanhando.mp4" controls></video>
+      <video src="videoapanhando.mp4" controls></video>
       <video src="videos/video4.mp4" controls></video>
       <video src="videos/video1.mp4" controls></video>
     </div>
