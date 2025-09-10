@@ -3,37 +3,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Vídeo TikTok</title>
+  <title>Feed de Vídeos Personalizável</title>
   <style>
     body {
       margin: 0;
       padding: 0;
       background-color: #000;
       font-family: sans-serif;
-      color: white;
+      overflow-x: hidden;
+    }
+
+    .container {
+      scroll-snap-type: y mandatory;
+      overflow-y: scroll;
+      height: 100vh;
+    }
+
+    .video {
+      width: 100vw;
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      height: 100vh;
+      scroll-snap-align: start;
+      position: relative;
+      color: white;
     }
 
-    video {
-      max-height: 70vh;
+    video, iframe {
       max-width: 100%;
-      border-radius: 10px;
+      max-height: 80%;
     }
 
     .info {
-      margin-top: 15px;
-      text-align: center;
+      position: absolute;
+      bottom: 80px;
+      left: 20px;
+      text-align: left;
     }
 
     .username {
       font-weight: bold;
       display: flex;
       align-items: center;
-      justify-content: center;
       gap: 5px;
     }
 
@@ -43,68 +56,145 @@
     }
 
     .title {
-      margin-top: 5px;
       font-size: 18px;
+      margin-top: 4px;
     }
 
-    .buttons {
-      margin-top: 20px;
-      display: flex;
-      gap: 20px;
-    }
-
-    button {
-      font-size: 24px;
+    .like-btn, .share-btn {
+      position: absolute;
+      bottom: 20px;
       background: none;
       border: none;
-      color: white;
+      font-size: 24px;
       cursor: pointer;
+      color: white;
     }
 
-    .liked {
+    .like-btn {
+      right: 20px;
+    }
+
+    .share-btn {
+      right: 70px;
+    }
+
+    .like-btn.liked {
       color: pink;
     }
   </style>
 </head>
 <body>
-
-  <video
-    src="https://v19-webapp-prime.tiktok.com/video/tos/useast2a/tos-useast2a-ve-0068-euttp/oEEF7ktGtABJQAzoE353XVEQwfRlftzC7PhIDJ/?a=1988&bti=ODszNWYuMDE6&ch=0&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C&cv=1&br=598&bt=299&cs=2&ds=3&ft=4fUEKMXh8Zmo0BlxyI4jV4IgDpWrKsd.&mime_type=video_mp4&qs=14&rc=ZjtmPGU2OzpmZWloOTdnZkBpajc2ajg6Zm54bDMzZjczM0A2L2NfMTZeNTQxXmI1NF4yYSMxajNecjRfa29gLS1kMWNzcw%3D%3D&btag=e00090000&expire=1757682141&l=20250910210108847663433A172407AAE8&ply_type=2&policy=2&signature=1f7693ced56a52e4c176a88913291817&tk=tt_chain_token"
-    autoplay
-    muted
-    loop
-    playsinline
-  ></video>
-
-  <div class="info">
-    <div class="username">
-      @PRIVET
-      <img src="https://cdn-icons-png.flaticon.com/512/12902/12902069.png" alt="Verificado">
-    </div>
-    <div class="title">la cocaina</div>
-  </div>
-
-  <div class="buttons">
-    <button class="like-btn" onclick="toggleLike(this)">👍</button>
-    <button onclick="copyLink()">📤</button>
-  </div>
+  <div class="container" id="videoContainer"></div>
 
   <script>
-    function toggleLike(btn) {
-      const liked = btn.classList.toggle('liked');
-      btn.textContent = liked ? '💕' : '👍';
-    }
+    const verifiedIcon = 'https://cdn-icons-png.flaticon.com/512/12902/12902069.png';
 
-    function copyLink() {
-      const video = document.querySelector('video');
-      const link = video?.src;
-      if (link) {
-        navigator.clipboard.writeText(link)
-          .then(() => alert("📎 Link copiado!"))
-          .catch(() => alert("❌ Erro ao copiar o link."));
+    // Vídeo fixo no topo
+    const fixedVideo = {
+      title: "🎯 Vídeo Especial de Destaque",
+      username: "VIDCT",
+      verified: true,
+      showUser: true,
+      videoHTML: `<video src="videovazado1" muted loop playsinline></video>`
+    };
+
+    // Outros vídeos
+    const otherVideos = [
+      {
+        title: "la cocaina",
+        username: "PRIVET",
+        verified: false,
+        showUser: false,
+        videoHTML: `<video src="https://v19-webapp-prime.tiktok.com/video/tos/useast2a/tos-useast2a-ve-0068-euttp/oEEF7ktGtABJQAzoE353XVEQ..." muted loop playsinline></video>`
+      },
+      {
+        title: "Tutorial de slime",
+        username: "slime_master",
+        verified: false,
+        showUser: false,
+        videoHTML: `<video src="https://v19-webapp-prime.tiktok.com/video/tos/useast2a/tos-useast2a-pve-0068/o8PAU0auHGQxEUSKmCvNDvzB..." muted loop playsinline></video>`
+      },
+      {
+        title: "Vídeo sem nome visível",
+        username: "invisivel123",
+        verified: false,
+        showUser: false,
+        videoHTML: `<video src="meuvideo4.mp4" muted loop playsinline></video>`
+      },
+      // Adicione até 25 vídeos como quiser aqui
+    ];
+
+    // Embaralhar os outros vídeos
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
       }
     }
-  </script>
 
+    shuffle(otherVideos);
+    const allVideos = [fixedVideo, ...otherVideos];
+
+    const container = document.getElementById('videoContainer');
+
+    allVideos.forEach((item) => {
+      const videoDiv = document.createElement('div');
+      videoDiv.className = 'video';
+
+      videoDiv.innerHTML = `
+        ${item.videoHTML}
+        <div class="info">
+          ${item.showUser ? `
+            <div class="username">
+              @${item.username}
+              ${item.verified ? `<img src="${verifiedIcon}" alt="Verificado">` : ''}
+            </div>` : ''}
+          <div class="title">${item.title}</div>
+        </div>
+        <button class="like-btn" onclick="toggleLike(this)">👍</button>
+        <button class="share-btn" onclick="shareVideo(this)">📤</button>
+      `;
+
+      container.appendChild(videoDiv);
+    });
+
+    function toggleLike(button) {
+      const liked = button.classList.toggle('liked');
+      button.innerText = liked ? '💕' : '👍';
+    }
+
+    function shareVideo(button) {
+      const videoElement = button.parentElement.querySelector('video');
+      if (videoElement && videoElement.src) {
+        navigator.clipboard.writeText(videoElement.src)
+          .then(() => {
+            alert("📎 Link do vídeo copiado!");
+          })
+          .catch(() => {
+            alert("❌ Não foi possível copiar o link.");
+          });
+      } else {
+        alert("⚠️ Vídeo não encontrado.");
+      }
+    }
+
+    // ▶️⏸️ Pause automático com visibilidade
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const video = entry.target;
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      });
+    }, {
+      threshold: 0.8
+    });
+
+    document.querySelectorAll('video').forEach(video => {
+      observer.observe(video);
+    });
+  </script>
 </body>
 </html>
