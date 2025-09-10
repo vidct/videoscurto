@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Vídeo Estilo TikTok</title>
+  <title>Vídeo TikTok Custom</title>
   <style>
     * {
       margin: 0;
@@ -13,30 +13,34 @@
 
     body {
       background: #000;
-      font-family: sans-serif;
       color: white;
+      font-family: sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       overflow: hidden;
     }
 
     .container {
-      width: 100vw;
-      height: 100vh;
       position: relative;
+      width: 100%;
+      height: 100%;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
+      flex-direction: column;
     }
 
     video {
-      max-height: 80vh;
+      max-height: 70vh;
       max-width: 100%;
       border-radius: 10px;
       cursor: pointer;
     }
 
     .info {
-      margin-top: 10px;
+      margin-top: 12px;
       text-align: center;
     }
 
@@ -54,18 +58,29 @@
     }
 
     .title, .audio {
-      margin-top: 5px;
+      margin-top: 4px;
       font-size: 16px;
       opacity: 0.8;
     }
 
-    .controls {
+    .controls-left, .controls-right {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
       display: flex;
+      flex-direction: column;
       gap: 20px;
-      margin-top: 15px;
     }
 
-    .controls button {
+    .controls-left {
+      left: 20px;
+    }
+
+    .controls-right {
+      right: 20px;
+    }
+
+    button {
       font-size: 22px;
       background: none;
       border: none;
@@ -77,31 +92,11 @@
       color: pink;
     }
 
-    .audio-icon {
-      font-size: 18px;
-      margin-left: 5px;
-    }
-
-    .skip-btn {
-      position: absolute;
-      right: 20px;
-      top: 20px;
-      background: rgba(255, 255, 255, 0.1);
-      color: white;
-      border: 1px solid #555;
-      padding: 8px 12px;
-      border-radius: 5px;
-      cursor: pointer;
-      display: none;
-    }
-
-    /* Mostrar botão de pular apenas em telas grandes (PC) */
-    @media (min-width: 768px) {
-      .skip-btn {
-        display: block;
+    @media (max-width: 768px) {
+      video {
+        max-height: 60vh;
       }
     }
-
   </style>
 </head>
 <body>
@@ -110,60 +105,52 @@
     <video id="video" src="video12.mp4" autoplay muted loop playsinline></video>
 
     <div class="info">
-      <div class="username" id="userInfo">
+      <div class="username">
         @privet
         <img src="https://cdn-icons-png.flaticon.com/512/12902/12902069.png" alt="Verificado">
       </div>
       <div class="title">🎯 Vídeo Incrível</div>
-      <div class="audio">🎵 Áudio Original <span class="audio-icon" id="audioStatus">🔇</span></div>
+      <div class="audio">🎵 Áudio Original</div>
     </div>
 
-    <div class="controls">
+    <div class="controls-left">
+      <button id="muteBtn" onclick="toggleMute()">🔇 Mute</button>
+    </div>
+
+    <div class="controls-right">
       <button onclick="toggleLike(this)">👍</button>
-      <button onclick="copyLink()">📤</button>
+      <button id="shareBtn" onclick="copyLink()">📤</button>
     </div>
-
-    <button class="skip-btn" onclick="skipVideo()">⏭️ Pular</button>
   </div>
 
   <script>
     const video = document.getElementById('video');
-    const audioStatus = document.getElementById('audioStatus');
+    const muteBtn = document.getElementById('muteBtn');
+    const shareBtn = document.getElementById('shareBtn');
 
-    // Pausar/despausar ao clicar no vídeo
-    video.addEventListener('click', () => {
-      if (video.paused) {
-        video.play();
-      } else {
-        video.pause();
-      }
-    });
+    // 🔇 Toggle mute
+    function toggleMute() {
+      video.muted = !video.muted;
+      muteBtn.textContent = video.muted ? '🔇 Mute' : '🔊 Desmute';
+    }
 
-    // Atualizar ícone de áudio (🔇 / 🔊)
-    video.addEventListener('volumechange', () => {
-      audioStatus.textContent = video.muted ? '🔇' : '🔊';
-    });
-
-    // Inicialmente mostrar como 🔇
-    audioStatus.textContent = video.muted ? '🔇' : '🔊';
-
-    // Curtir/descurtir
+    // ❤️ Toggle like
     function toggleLike(btn) {
       const liked = btn.classList.toggle('liked');
       btn.textContent = liked ? '💕' : '👍';
     }
 
-    // Copiar link do vídeo
+    // 📤 Copiar link (compartilhar)
     function copyLink() {
       navigator.clipboard.writeText(video.src)
         .then(() => alert("📎 Link do vídeo copiado!"))
         .catch(() => alert("❌ Erro ao copiar link."));
     }
 
-    // Simula pular vídeo (PC): apenas mostra alerta
-    function skipVideo() {
-      alert("🔁 Próximo vídeo (exemplo)");
-      // Aqui você pode trocar src do vídeo se quiser
+    // ✅ Ativar ou desativar botão de compartilhar
+    const showShare = true; // coloque false para esconder
+    if (!showShare) {
+      shareBtn.style.display = 'none';
     }
   </script>
 
