@@ -90,7 +90,7 @@
   <div class="container">
     <!-- Vídeo -->
     <video id="video" autoplay muted loop>
-      <source src="videos/video1.mp4" type="video/mp4">
+      <source src="envato_video_gen_Sep_04_2025_20_47_32.mp4" type="video/mp4">
     </video>
 
     <!-- Botões de navegação -->
