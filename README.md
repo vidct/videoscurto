@@ -134,8 +134,8 @@
 
     <!-- Explorar (outros vídeos fixos) -->
     <div class="explore" id="exploreSection">
-      <video src="envato_video_gen_Sep_04_2025_20_47_32.mp4" controls></video>
-      <video src="envato_video_gen_Sep_04_2025_21_11_03.mp4" controls></video>
+      <video src="vazado.mp4" controls></video>
+      <video src="vvaazzaaddoo.mp4" controls></video>
       <video src="videos/video4.mp4" controls></video>
       <video src="videos/video1.mp4" controls></video>
     </div>
@@ -144,9 +144,12 @@
   <script>
     const allVideos = [
       "video12.mp4",
-      "videos/video2.mp4",
-      "videos/video3.mp4",
-      "videos/video4.mp4"
+      "video1.mp4",
+      "video5.mp4",
+      "video6.mp4",
+      "video2.mp4",
+      "video4.mp4",
+      "video3.mp4"
     ];
 
     let playlist = [];
