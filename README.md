@@ -1,4 +1,3 @@
-
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
@@ -119,14 +118,12 @@
     <!-- Menu -->
     <div class="top-menu">
       <span id="tabFy" class="active">FY</span>
-      <span id="tabExplore">Explorar</span>
+      <span id="tabExplore">Explorar (Em alta) </span>
     </div>
 
     <!-- FY (player de vídeos aleatórios) -->
     <div class="fy" id="fySection">
-      <video id="video" autoplay loop>
-        <source src="videos/video1.mp4" type="video/mp4">
-      </video>
+      <video id="video" autoplay loop></video>
       <button class="btn" id="prevBtn">Anterior</button>
       <button class="btn" id="nextBtn">Próximo</button>
       <button id="likeBtn">👍</button>
@@ -168,7 +165,6 @@
     const nextBtn = document.getElementById("nextBtn");
     const likeBtn = document.getElementById("likeBtn");
 
-    // Embaralhar array
     function shuffle(array) {
       let m = array.length, t, i;
       while (m) {
@@ -187,16 +183,18 @@
     function updateVideo(src) {
       video.src = src;
       video.play();
-      prevBtn.style.display = history.length > 1 ? "block" : "none";
+      prevBtn.style.display = currentIndex > 0 ? "block" : "none";
     }
 
-    nextBtn.addEventListener("click", () => {
+    function playNextVideo() {
       if (playlist.length === 0) refillPlaylist();
       const nextVideo = playlist.shift();
       history.push(nextVideo);
       currentIndex = history.length - 1;
       updateVideo(nextVideo);
-    });
+    }
+
+    nextBtn.addEventListener("click", playNextVideo);
 
     prevBtn.addEventListener("click", () => {
       if (currentIndex > 0) {
@@ -215,11 +213,9 @@
       else video.pause();
     });
 
-    // Inicializa
     refillPlaylist();
-    nextBtn.click();
+    playNextVideo();
 
-    // Tabs
     const tabFy = document.getElementById("tabFy");
     const tabExplore = document.getElementById("tabExplore");
     const fySection = document.getElementById("fySection");
