@@ -133,7 +133,7 @@
     <div class="explore" id="exploreSection">
       <video src="videoapanhando.mp4" controls></video>
       <video src="newsonibus.mp4" controls></video>
-      <video src="videos/video4.mp4" controls></video>
+      <video src="videodapraca.mp4" controls></video>
       <video src="videos/video1.mp4" controls></video>
     </div>
   </div>
