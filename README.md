@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
@@ -26,6 +27,41 @@
       align-items: center;
       overflow: hidden;
     }
+
+    /* Popup */
+    .popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    .popup-box {
+      background: #111;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      width: 250px;
+      box-shadow: 0 0 15px rgba(255,255,255,0.3);
+    }
+    .popup-box h2 {
+      margin: 0 0 15px 0;
+    }
+    .popup-buttons button {
+      margin: 5px;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .close-btn { background: #555; color: #fff; }
+    .goto-btn { background: #00c853; color: #fff; }
 
     /* Top menu */
     .top-menu {
@@ -100,32 +136,37 @@
       height: 100%;
       display: none;
       flex-wrap: wrap;
-      gap: 6px;
+      gap: 2px;
       overflow-y: auto;
-      padding: 6px;
+      padding: 2px;
       box-sizing: border-box;
     }
     .explore-item {
-      width: calc(50% - 6px);
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      color: #ccc;
+      width: calc(50% - 2px);
+      text-align: center;
+      color: #fff;
       font-size: 12px;
     }
-    .explore-item video {
+    .explore video {
       width: 100%;
       height: 180px;
       object-fit: cover;
-      border-radius: 4px;
-    }
-    .views {
-      margin-top: 2px;
-      color: #aaa;
+      display: block;
     }
   </style>
 </head>
 <body>
+
+  <!-- Popup -->
+  <div class="popup" id="welcomePopup">
+    <div class="popup-box">
+      <h2>Bem-vindo!</h2>
+      <div class="popup-buttons">
+        <button class="close-btn" id="closePopup">Fechar</button>
+        <button class="goto-btn" id="gotoSite">Ir para o site</button>
+      </div>
+    </div>
+  </div>
 
   <div class="container">
     <!-- Menu -->
@@ -134,32 +175,22 @@
       <span id="tabExplore">Explorar</span>
     </div>
 
-    <!-- FY -->
+    <!-- FY (player de vídeos aleatórios) -->
     <div class="fy" id="fySection">
-      <video id="video" autoplay loop></video>
+      <video id="video" autoplay loop>
+        <source src="videos/video1.mp4" type="video/mp4">
+      </video>
       <button class="btn" id="prevBtn">Anterior</button>
       <button class="btn" id="nextBtn">Próximo</button>
       <button id="likeBtn">👍</button>
     </div>
 
-    <!-- Explorar -->
+    <!-- Explorar (outros vídeos fixos) -->
     <div class="explore" id="exploreSection">
-      <div class="explore-item">
-        <video src="videoapanhando.mp4" controls></video>
-        <span class="views">views 6k</span>
-      </div>
-      <div class="explore-item">
-        <video src="newsonibus.mp4" controls></video>
-        <span class="views">views 5k</span>
-      </div>
-      <div class="explore-item">
-        <video src="videodapraca.mp4" controls></video>
-        <span class="views">views 100 (NOVO)</span>
-      </div>
-      <div class="explore-item">
-        <video src="videos/video1.mp4" controls></video>
-        <span class="views">views 1k</span>
-      </div>
+      <div class="explore-item"><video src="videoapanhando.mp4" controls></video>views 1k</div>
+      <div class="explore-item"><video src="newsonibus.mp4" controls></video>views 1k</div>
+      <div class="explore-item"><video src="videos/video4.mp4" controls></video>views 1k</div>
+      <div class="explore-item"><video src="videos/video1.mp4" controls></video>views 1k</div>
     </div>
   </div>
 
@@ -190,6 +221,7 @@
     const nextBtn = document.getElementById("nextBtn");
     const likeBtn = document.getElementById("likeBtn");
 
+    // Embaralhar array
     function shuffle(array) {
       let m = array.length, t, i;
       while (m) {
@@ -208,18 +240,16 @@
     function updateVideo(src) {
       video.src = src;
       video.play();
-      prevBtn.style.display = currentIndex > 0 ? "block" : "none";
+      prevBtn.style.display = history.length > 1 ? "block" : "none";
     }
 
-    function playNextVideo() {
+    nextBtn.addEventListener("click", () => {
       if (playlist.length === 0) refillPlaylist();
       const nextVideo = playlist.shift();
       history.push(nextVideo);
       currentIndex = history.length - 1;
       updateVideo(nextVideo);
-    }
-
-    nextBtn.addEventListener("click", playNextVideo);
+    });
 
     prevBtn.addEventListener("click", () => {
       if (currentIndex > 0) {
@@ -238,9 +268,11 @@
       else video.pause();
     });
 
+    // Inicializa
     refillPlaylist();
-    playNextVideo();
+    nextBtn.click();
 
+    // Tabs
     const tabFy = document.getElementById("tabFy");
     const tabExplore = document.getElementById("tabExplore");
     const fySection = document.getElementById("fySection");
@@ -258,6 +290,19 @@
       tabFy.classList.remove("active");
       exploreSection.style.display = "flex";
       fySection.style.display = "none";
+    });
+
+    // Popup
+    const popup = document.getElementById("welcomePopup");
+    const closePopup = document.getElementById("closePopup");
+    const gotoSite = document.getElementById("gotoSite");
+
+    closePopup.addEventListener("click", () => {
+      popup.style.display = "none";
+    });
+
+    gotoSite.addEventListener("click", () => {
+      window.location.href = "https://4br.me/Videoscurto"; // troque para sua URL
     });
   </script>
 
