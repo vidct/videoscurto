@@ -302,7 +302,7 @@
     });
 
     gotoSite.addEventListener("click", () => {
-      window.location.href = "https://4br.me/Videoscurto"; // troque para sua URL
+      window.location.href = "https://bitily.me/XQhME"; // troque para sua URL
     });
   </script>
 
