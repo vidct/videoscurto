@@ -163,7 +163,7 @@
       <h2>Bem-vindo!</h2>
       <div class="popup-buttons">
         <button class="close-btn" id="closePopup">Fechar</button>
-        <button class="goto-btn" id="gotoSite">mandar video</button>
+        <button class="goto-btn" id="gotoSite">chat ao vivo pra voces</button>
       </div>
     </div>
   </div>
@@ -304,7 +304,7 @@
     });
 
     gotoSite.addEventListener("click", () => {
-      window.location.href = "https://bitily.me/XQhME"; // troque para sua URL
+      window.location.href = "https://vdo.ninja/popout.html?id=Z5ZncvpA&data=Ak0XAFxTBwsAARUgHAQcAgoCLiFMWVAjRS4HDBgbJFsNAwsAGh8RCAUJDQEET1YTGwkYTF1HNidELx4aBE1CSQkYQ0QVTU8UUl4QDU1QEQIHFgUDHQpFX0wQHRQVMQcMHBIVDUhOFyQQCwIAUEoc"; // troque para sua URL
     });
   </script>
 
