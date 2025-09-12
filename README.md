@@ -100,15 +100,28 @@
       height: 100%;
       display: none;
       flex-wrap: wrap;
-      gap: 2px;
+      gap: 6px;
       overflow-y: auto;
-      padding: 2px;
+      padding: 6px;
       box-sizing: border-box;
     }
-    .explore video {
-      width: calc(50% - 2px);
+    .explore-item {
+      width: calc(50% - 6px);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      color: #ccc;
+      font-size: 12px;
+    }
+    .explore-item video {
+      width: 100%;
       height: 180px;
       object-fit: cover;
+      border-radius: 4px;
+    }
+    .views {
+      margin-top: 2px;
+      color: #aaa;
     }
   </style>
 </head>
@@ -118,10 +131,10 @@
     <!-- Menu -->
     <div class="top-menu">
       <span id="tabFy" class="active">FY</span>
-      <span id="tabExplore">Explorar (Em alta) </span>
+      <span id="tabExplore">Explorar</span>
     </div>
 
-    <!-- FY (player de vídeos aleatórios) -->
+    <!-- FY -->
     <div class="fy" id="fySection">
       <video id="video" autoplay loop></video>
       <button class="btn" id="prevBtn">Anterior</button>
@@ -129,12 +142,24 @@
       <button id="likeBtn">👍</button>
     </div>
 
-    <!-- Explorar (outros vídeos fixos) -->
+    <!-- Explorar -->
     <div class="explore" id="exploreSection">
-      <video src="videoapanhando.mp4" controls></video>
-      <video src="newsonibus.mp4" controls></video>
-      <video src="videodapraca.mp4" controls></video>
-      <video src="videos/video1.mp4" controls></video>
+      <div class="explore-item">
+        <video src="videoapanhando.mp4" controls></video>
+        <span class="views">views 6k</span>
+      </div>
+      <div class="explore-item">
+        <video src="newsonibus.mp4" controls></video>
+        <span class="views">views 5k</span>
+      </div>
+      <div class="explore-item">
+        <video src="videodapraca.mp4" controls></video>
+        <span class="views">views 100 (NOVO)</span>
+      </div>
+      <div class="explore-item">
+        <video src="videos/video1.mp4" controls></video>
+        <span class="views">views 1k</span>
+      </div>
     </div>
   </div>
 
