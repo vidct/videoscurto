@@ -163,7 +163,7 @@
       <h2>Bem-vindo!</h2>
       <div class="popup-buttons">
         <button class="close-btn" id="closePopup">Fechar</button>
-        <button class="goto-btn" id="gotoSite">Videos vazados que nao deu pra postar</button>
+        <button class="goto-btn" id="gotoSite">Entrar no site</button>
       </div>
     </div>
   </div>
@@ -172,7 +172,7 @@
     <!-- Menu -->
     <div class="top-menu">
       <span id="tabFy" class="active">FY</span>
-      <span id="tabExplore">Explorar</span>
+      <span id="tabExplore">Explorar (EM ALTA)</span>
     </div>
 
     <!-- FY (player de vídeos aleatórios) -->
