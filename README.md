@@ -163,7 +163,7 @@
       <h2>Bem-vindo!</h2>
       <div class="popup-buttons">
         <button class="close-btn" id="closePopup">Fechar</button>
-        <button class="goto-btn" id="gotoSite">postar video / denuciar</button>
+        <button class="goto-btn" id="gotoSite">anucio</button>
       </div>
     </div>
   </div>
