@@ -163,7 +163,7 @@
       <h2>Bem-vindo!</h2>
       <div class="popup-buttons">
         <button class="close-btn" id="closePopup">Fechar</button>
-        <button class="goto-btn" id="gotoSite">Ir para o site</button>
+        <button class="goto-btn" id="gotoSite">Videos vazados que nao deu pra postar</button>
       </div>
     </div>
   </div>
@@ -187,9 +187,9 @@
 
     <!-- Explorar (outros vídeos fixos) -->
     <div class="explore" id="exploreSection">
-      <div class="explore-item"><video src="videoapanhando.mp4" controls></video>views 1k</div>
-      <div class="explore-item"><video src="newsonibus.mp4" controls></video>views 1k</div>
-      <div class="explore-item"><video src="videos/video4.mp4" controls></video>views 1k</div>
+      <div class="explore-item"><video src="videoapanhando.mp4" controls></video>views 5k</div>
+      <div class="explore-item"><video src="newsonibus.mp4" controls></video>views 3k</div>
+      <div class="explore-item"><video src="videodapraca.mp4" controls></video>views 500 (novo)</div>
       <div class="explore-item"><video src="videos/video1.mp4" controls></video>views 1k</div>
     </div>
   </div>
