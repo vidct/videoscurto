@@ -187,7 +187,7 @@
 
     <!-- Explorar (outros vídeos fixos) -->
     <div class="explore" id="exploreSection">
-      <div class="explore-item"><video src="videoapanhando.mp4" controls></video>menina do 5v1 | views 5k</div>
+      <div class="explore-item"><video src="videos/videoapanhando.mp4" controls></video>menina do 5v1 | views 5k</div>
       <div class="explore-item"><video src="newsonibus.mp4" controls></video>news 5v1 | views 3k</div>
       <div class="explore-item"><video src="videodapraca.mp4" controls></video>praca | views 2k (novo)</div>
       <div class="explore-item"><video src="videos/video1.mp4" controls></video>video tirado do ar</div>
